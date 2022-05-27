@@ -5,54 +5,54 @@ blueprint:
   description: replaces media player card with mushroom media player card + Sonos favorites by TS
   name: Replace Mushroom Media Player Card + Sonos favorites
   type: replace-card
-  version: '0.2.7'
+  version: '1.0.0'
   input:
     10_fav_entity: 
-      description: Choose Sonos favorite entity
+      description: Choose Sonos favorite 01 entity
       type: entity-picker
       name: Entity
     11_fav_source: 
-      description: Choose Sonos favorite source name
+      description: Choose Sonos favorite 01 source name
       type: text-field
       name: Source
     20_fav_entity: 
-      description: Choose Sonos favorite entity
+      description: Choose Sonos favorite 02 entity
       type: entity-picker
       name: Entity
     21_fav_source: 
-      description: Choose Sonos favorite source name
+      description: Choose Sonos favorite 02 source name
       type: text-field
       name: Source
     30_fav_entity: 
-      description: Choose Sonos favorite entity
+      description: Choose Sonos favorite 03 entity
       type: entity-picker
       name: Entity
     31_fav_source: 
-      description: Choose Sonos favorite source name
+      description: Choose Sonos favorite 03 source name
       type: text-field
       name: Source
     40_fav_entity: 
-      description: Choose Sonos favorite entity
+      description: Choose Sonos favorite 04 entity
       type: entity-picker
       name: Entity
     41_fav_source: 
-      description: Choose Sonos favorite source name
+      description: Choose Sonos favorite 04 source name
       type: text-field
       name: Source
     50_fav_entity: 
-      description: Choose Sonos favorite entity
+      description: Choose Sonos favorite 05 entity
       type: entity-picker
       name: Entity
     51_fav_source: 
-      description: Choose Sonos favorite source name
+      description: Choose Sonos favorite 05 source name
       type: text-field
       name: Source
     60_fav_entity: 
-      description: Choose Sonos favorite entity
+      description: Choose Sonos favorite 06 entity
       type: entity-picker
       name: Entity
     61_fav_source: 
-      description: Choose Sonos favorite source name
+      description: Choose Sonos favorite 06 source name
       type: text-field
       name: Source  
 card:
