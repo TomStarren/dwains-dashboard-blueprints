@@ -5,7 +5,7 @@ blueprint:
   description: replaces media player card with mushroom media player card + Sonos favorites by TS
   name: Replace Mushroom Media Player Card + Sonos favorites
   type: replace-card
-  version: '1.0.0'
+  version: '1.0.1'
   input:
     10_fav_entity: 
       description: Choose Sonos favorite 01 entity
@@ -79,7 +79,7 @@ card:
       cards:
         - type: custom:mushroom-entity-card
           entity: $10_fav_entity$
-          name: NPO Radio 2
+          name: $11_fav_source$
           fill_container: true
           hide_icon: false
           use_entity_picture: true
@@ -98,7 +98,7 @@ card:
               entity_id: $replace_with_input_entity$
         - type: custom:mushroom-entity-card
           entity: $20_fav_entity$
-          name: NPO 3FM
+          name: $21_fav_source$
           fill_container: true
           hide_icon: false
           use_entity_picture: true
@@ -116,8 +116,8 @@ card:
             target:
               entity_id: $replace_with_input_entity$
         - type: custom:mushroom-entity-card
-          entity: input_boolean.dummy_radio_538_verruckte_stunden
-          name: $30_fav_entity$
+          entity: $30_fav_entity$
+          name: $31_fav_source$
           fill_container: true
           hide_icon: false
           use_entity_picture: true
@@ -136,7 +136,7 @@ card:
               entity_id: $replace_with_input_entity$
         - type: custom:mushroom-entity-card
           entity: $40_fav_entity$
-          name: Qmusic Het Foute Uur.
+          name: $41_fav_source$
           fill_container: true
           hide_icon: false
           use_entity_picture: true
@@ -155,7 +155,7 @@ card:
               entity_id: $replace_with_input_entity$
         - type: custom:mushroom-entity-card
           entity: $50_fav_entity$
-          name: Christmas Radio
+          name: $51_fav_source$
           fill_container: true
           hide_icon: false
           use_entity_picture: true
@@ -173,8 +173,8 @@ card:
             target:
               entity_id: $replace_with_input_entity$
         - type: custom:mushroom-entity-card
-          entity: input_boolean.dummy_radio_sky_radio_christmas
-          name: $60_fav_entity$
+          entity: $60_fav_entity$
+          name: $61_fav_source$
           fill_container: true
           hide_icon: false
           use_entity_picture: true
