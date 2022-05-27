@@ -1,0 +1,144 @@
+blueprint:
+  custom_cards:
+  - mushroom-media-player-card
+  - mushroom-chips-card
+  description: replaces media player card with mushroom media player card + Sonos favorites by TS
+  name: Replace Mushroom Media Player Card + Sonos favorites
+  type: replace-card
+  version: '0.2.7'
+card:
+  type: vertical-stack
+  cards:
+    - type: custom:mushroom-media-player-card
+      use_media_info: true
+      use_media_artwork: true
+      entity: $replace_with_input_entity$
+      name: $replace_with_input_name$
+      volume_controls:
+        - volume_mute
+        - volume_buttons
+        - volume_set
+      media_controls:  
+        - on_off
+        - shuffle
+        - previous
+        - play_pause_stop
+        - next
+        - repeat
+    - type: grid
+      square: false
+      cards:
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.dummy_radio_npo2
+          name: NPO Radio 2
+          fill_container: true
+          hide_icon: false
+          use_entity_picture: true
+          primary_info: name
+          secondary_info: none
+          hold_action:
+            action: none
+          double_tap_action:
+            action: none
+          tap_action:
+            action: call-service
+            service: media_player.select_source
+            service_data:
+              source: NPO Radio 2
+            target:
+              entity_id: $replace_with_input_entity$
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.dummy_radio_3fm
+          name: NPO 3FM
+          fill_container: true
+          hide_icon: false
+          use_entity_picture: true
+          primary_info: name
+          secondary_info: none
+          hold_action:
+            action: none
+          double_tap_action:
+            action: none
+          tap_action:
+            action: call-service
+            service: media_player.select_source
+            service_data:
+              source: NPO 3FM
+            target:
+              entity_id: $replace_with_input_entity$
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.dummy_radio_538_verruckte_stunden
+          name: 538 Verrückte Stunden
+          fill_container: true
+          hide_icon: false
+          use_entity_picture: true
+          primary_info: name
+          secondary_info: none
+          hold_action:
+            action: none
+          double_tap_action:
+            action: none
+          tap_action:
+            action: call-service
+            service: media_player.select_source
+            service_data:
+              source: 538 Verrückte Stunden
+            target:
+              entity_id: $replace_with_input_entity$
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.dummy_radio_qmusic_foute_uur
+          name: Qmusic Het Foute Uur.
+          fill_container: true
+          hide_icon: false
+          use_entity_picture: true
+          primary_info: name
+          secondary_info: none
+          hold_action:
+            action: none
+          double_tap_action:
+            action: none
+          tap_action:
+            action: call-service
+            service: media_player.select_source
+            service_data:
+              source: Qmusic Het Foute Uur.
+            target:
+              entity_id: $replace_with_input_entity$
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.dummy_radio_christmas_radio
+          name: Christmas Radio
+          fill_container: true
+          hide_icon: false
+          use_entity_picture: true
+          primary_info: name
+          secondary_info: none
+          hold_action:
+            action: none
+          double_tap_action:
+            action: none
+          tap_action:
+            action: call-service
+            service: media_player.select_source
+            service_data:
+              source: Christmas Radio
+            target:
+              entity_id: $replace_with_input_entity$
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.dummy_radio_sky_radio_christmas
+          name: Sky Radio Christmas
+          fill_container: true
+          hide_icon: false
+          use_entity_picture: true
+          primary_info: name
+          secondary_info: none
+          hold_action:
+            action: none
+          double_tap_action:
+            action: none
+          tap_action:
+            action: call-service
+            service: media_player.select_source
+            service_data:
+              source: Sky Radio Christmas
+            target:
+              entity_id: $replace_with_input_entity$
