@@ -6,6 +6,55 @@ blueprint:
   name: Replace Mushroom Media Player Card + Sonos favorites
   type: replace-card
   version: '0.2.7'
+  input:
+    10_fav_entity: 
+      description: Choose Sonos favorite entity
+      type: entity-picker
+      name: Entity
+    11_fav_source: 
+      description: Choose Sonos favorite source name
+      type: text-field
+      name: Source
+    20_fav_entity: 
+      description: Choose Sonos favorite entity
+      type: entity-picker
+      name: Entity
+    21_fav_source: 
+      description: Choose Sonos favorite source name
+      type: text-field
+      name: Source
+    30_fav_entity: 
+      description: Choose Sonos favorite entity
+      type: entity-picker
+      name: Entity
+    31_fav_source: 
+      description: Choose Sonos favorite source name
+      type: text-field
+      name: Source
+    40_fav_entity: 
+      description: Choose Sonos favorite entity
+      type: entity-picker
+      name: Entity
+    41_fav_source: 
+      description: Choose Sonos favorite source name
+      type: text-field
+      name: Source
+    50_fav_entity: 
+      description: Choose Sonos favorite entity
+      type: entity-picker
+      name: Entity
+    51_fav_source: 
+      description: Choose Sonos favorite source name
+      type: text-field
+      name: Source
+    60_fav_entity: 
+      description: Choose Sonos favorite entity
+      type: entity-picker
+      name: Entity
+    61_fav_source: 
+      description: Choose Sonos favorite source name
+      type: text-field
+      name: Source  
 card:
   type: vertical-stack
   cards:
@@ -29,7 +78,7 @@ card:
       square: false
       cards:
         - type: custom:mushroom-entity-card
-          entity: input_boolean.dummy_radio_npo2
+          entity: $10_fav_entity$
           name: NPO Radio 2
           fill_container: true
           hide_icon: false
@@ -44,11 +93,11 @@ card:
             action: call-service
             service: media_player.select_source
             service_data:
-              source: NPO Radio 2
+              source: $11_fav_source$
             target:
               entity_id: $replace_with_input_entity$
         - type: custom:mushroom-entity-card
-          entity: input_boolean.dummy_radio_3fm
+          entity: $20_fav_entity$
           name: NPO 3FM
           fill_container: true
           hide_icon: false
@@ -63,12 +112,12 @@ card:
             action: call-service
             service: media_player.select_source
             service_data:
-              source: NPO 3FM
+              source: $21_fav_source$
             target:
               entity_id: $replace_with_input_entity$
         - type: custom:mushroom-entity-card
           entity: input_boolean.dummy_radio_538_verruckte_stunden
-          name: 538 Verrückte Stunden
+          name: $30_fav_entity$
           fill_container: true
           hide_icon: false
           use_entity_picture: true
@@ -82,11 +131,11 @@ card:
             action: call-service
             service: media_player.select_source
             service_data:
-              source: 538 Verrückte Stunden
+              source: $31_fav_source$
             target:
               entity_id: $replace_with_input_entity$
         - type: custom:mushroom-entity-card
-          entity: input_boolean.dummy_radio_qmusic_foute_uur
+          entity: $40_fav_entity$
           name: Qmusic Het Foute Uur.
           fill_container: true
           hide_icon: false
@@ -101,11 +150,11 @@ card:
             action: call-service
             service: media_player.select_source
             service_data:
-              source: Qmusic Het Foute Uur.
+              source: $41_fav_source$
             target:
               entity_id: $replace_with_input_entity$
         - type: custom:mushroom-entity-card
-          entity: input_boolean.dummy_radio_christmas_radio
+          entity: $50_fav_entity$
           name: Christmas Radio
           fill_container: true
           hide_icon: false
@@ -120,12 +169,12 @@ card:
             action: call-service
             service: media_player.select_source
             service_data:
-              source: Christmas Radio
+              source: $51_fav_source$
             target:
               entity_id: $replace_with_input_entity$
         - type: custom:mushroom-entity-card
           entity: input_boolean.dummy_radio_sky_radio_christmas
-          name: Sky Radio Christmas
+          name: $60_fav_entity$
           fill_container: true
           hide_icon: false
           use_entity_picture: true
@@ -139,6 +188,6 @@ card:
             action: call-service
             service: media_player.select_source
             service_data:
-              source: Sky Radio Christmas
+              source: $61_fav_source$
             target:
               entity_id: $replace_with_input_entity$
