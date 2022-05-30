@@ -1,6 +1,6 @@
 blueprint:
-  name: Thermostat and A/C card Blueprint
-  description: Thermostat and A/C card by TS
+  name: Thermostat and AC card
+  description: Thermostat and AC card by TS
   version: "0.8"
   type: card
   
