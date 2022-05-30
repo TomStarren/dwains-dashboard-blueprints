@@ -82,7 +82,7 @@ card:
           primary: $01_Thermostat_name$
           secondary: >-
             🌡{{
-            state_attr('$02_thermostat_entity$'.'current_temperature')|float}}°C
+            state_attr('$02_thermostat_entity$','current_temperature')|float}}°C
             💧{{
             states('$11_room_humidity$')|float}}%
           icon: |-
