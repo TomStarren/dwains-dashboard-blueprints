@@ -79,7 +79,7 @@ card:
     - type: custom:stack-in-card
       cards:
         - type: custom:mushroom-template-card
-          primary: Klimatyzacja Salon
+          primary: $01_Thermostat_name$
           secondary: >-
             🌡{{
             states('$10_room_temperature$')|float}}°C
@@ -219,31 +219,3 @@ card:
                 title: Zużycie energii
                 show_header_toggle: false
                 state_color: false
-   
-      
-      
-      
-      
-      
-      
-
-    - type: custom:simple-thermostat
-      entity: $02_thermostat_entity$
-      header:
-        name:  $01_Thermostat_name$
-      control: $03_thermostat_controls_buttons_hide_show$
-      layout:
-        step: column
-        mode:
-          names: $04_thermostat_controls_names_hide_show$
-          icons: $05_thermostat_controls_icons_hide_show$
-          headings: $06_thermostat_controls_heading_hide_show$
-        sensors:
-          labels: $09_thermostat_sensors_label_hide_show$
-      hide:
-        temperature: $07_thermostat_temperature_hide_show$
-        state: $08_thermostat_state_hide_show$
-        
-        
-        
-        
