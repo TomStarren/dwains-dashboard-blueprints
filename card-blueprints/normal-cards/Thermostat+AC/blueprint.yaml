@@ -20,58 +20,16 @@ blueprint:
       name: Thermostat entity
       description: The thermostat entity
       type: entity-picker
-       
-    03_thermostat_controls_buttons_hide_show:
-      name: Controls hide
-      description: Controls hide
-      type: checkbox
-      default_value: false
-       
-    04_thermostat_controls_names_hide_show:
-      name: If Controls are activated name hide
-      description: If Controls are activated name hide
-      type: checkbox
-      default_value: false
-       
-    05_thermostat_controls_icons_hide_show:
-      name: If Controls are activated icon hide
-      description: If Controls are activated icon hide
-      type: checkbox
-      default_value: false
-       
-    06_thermostat_controls_heading_hide_show:
-      name: If Controls are activated heading hide
-      description: If Controls are activated heading hide
-      type: checkbox
-      default_value: false
-       
-    07_thermostat_temperature_hide_show:
-      name: Temperature hide
-      description: Hide temperature
-      type: checkbox
-      default_value: false
-
-    08_thermostat_state_hide_show:
-      name: State hide
-      description: Hide state
-      type: checkbox
-      default_value: false
-       
-    09_thermostat_sensors_label_hide_show:
-      name: If sensors are activated hide label
-      description: If the sensors are activated hide sensors label
-      type: checkbox
-      default_value: false
-       
-    10_room_temperature:
-      name: Pick the entity for the room temperature
-      description: The temperature of this entity will be used in the card
-      type: entity-picker
       
-    11_room_humidity:
+    03_room_humidity:
       name: Pick the entity for the room hunidity
       description: The humidity of this entity will be used in the card
       type: entity-picker
+    
+    04_helper_name:
+      name: Pick the name for the helper
+      description: Name for the helper
+      type: text-field
 
 card:
   type: horizontal-stack
@@ -127,7 +85,7 @@ card:
               icons: true
               headings: false
             sensors:
-              labels: $09_thermostat_sensors_label_hide_show$
+              labels: true
           hide:
             temperature: true
             state: true
@@ -147,7 +105,7 @@ card:
             - type: button
               tap_action:
                 action: toggle
-              entity: input_boolean.wykres_temp1
+              entity: input_boolean.$04_helper_name$_temp
               show_name: false
               show_icon: true
               show_state: false
@@ -155,7 +113,7 @@ card:
             - type: button
               tap_action:
                 action: toggle
-              entity: input_boolean.wykres_wilg1
+              entity: input_boolean.$04_helper_name$_wilg
               show_name: false
               show_icon: true
               show_state: false
@@ -163,7 +121,7 @@ card:
             - type: button
               tap_action:
                 action: toggle
-              entity: input_boolean.zuzy_energ1
+              entity: input_boolean.$04_helper_name$_energy
               show_name: false
               show_icon: true
               show_state: false
@@ -173,7 +131,7 @@ card:
           cards:
             - type: conditional
               conditions:
-                - entity: input_boolean.wykres_temp1
+                - entity: input_boolean.$04_helper_name$_temp
                   state: 'on'
               card:
                 type: statistics-graph
@@ -186,7 +144,7 @@ card:
                 days_to_show: 3
             - type: conditional
               conditions:
-                - entity: input_boolean.wykres_wilg1
+                - entity: input_boolean.$04_helper_name$_wilg
                   state: 'on'
               card:
                 type: statistics-graph
@@ -199,7 +157,7 @@ card:
                 days_to_show: 3
             - type: conditional
               conditions:
-                - entity: input_boolean.zuzy_energ1
+                - entity: input_boolean.$04_helper_name$_energy
                   state: 'on'
               card:
                 type: entities
