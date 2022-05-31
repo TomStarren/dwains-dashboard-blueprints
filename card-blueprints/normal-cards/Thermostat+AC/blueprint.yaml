@@ -46,12 +46,17 @@ blueprint:
       description: Pick the entity for the daily energy measurement
       type: entity-picker
 
-    08_energy_monthly:
+    08_energy_weekly:
+      name: Pick the entity for the weekly energy measurement
+      description: Pick the entity for the weekly energy measurement
+      type: entity-picker
+
+    09_energy_monthly:
       name: Pick the entity for the monthly energy measurement
       description: Pick the entity for the monthly energy measurement
       type: entity-picker
 
-    09_energy_yearly:
+    10_energy_yearly:
       name: Pick the entity for the yearly energy measurement
       description: Pick the entity for the yearly energy measurement
       type: entity-picker
@@ -878,10 +883,12 @@ card:
                   - entity: $06_energy_current$
                     name: Huidig verbruik
                   - entity: $07_energy_daily$
+                    name: Dag verbruik
+                  - entity: $08_energy_weekly$
                     name: Week verbruik
-                  - entity: $08_energy_monthly$
+                  - entity: $09_energy_monthly$
                     name: Maand verbruik
-                  - entity: $09_energy_yearly$
+                  - entity: $10_energy_yearly$
                     name: Jaar verbruik
                 show_header_toggle: false
                 state_color: false
