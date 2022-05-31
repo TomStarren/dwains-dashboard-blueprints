@@ -1,38 +1,63 @@
 blueprint:
   name: Thermostat and AC card
   description: Thermostat and AC card by TS
-  version: "0.8"
+  version: "1.0.0"
   type: card
-  
+
   custom_cards:
     - simple-thermostat
-    - mushroom-template-card
     - stack-in-card
+    - button-card
+    - custom:mini-graph-card
 
   input:
-  
     01_Thermostat_name:
       name: Thermostat name
       description: Thermostat name
       type: text-field
-  
+
     02_thermostat_entity:
       name: Thermostat entity
       description: The thermostat entity
       type: entity-picker
-      
-    03_room_humidity:
+
+    03_room_temperature:
+      name: Pick the entity for the room temperature
+      description: The temperature of this entity will be used in the card
+      type: entity-picker
+
+    04_room_humidity:
       name: Pick the entity for the room hunidity
       description: The humidity of this entity will be used in the card
       type: entity-picker
-    
-    04_helper_name:
+
+    05_helper_name:
       name: Pick the name for the helper
       description: Name for the helper
       type: text-field
 
+    06_energy_current:
+      name: Pick the entity for the current energy measurement
+      description: Pick the entity for the current energy measurement
+      type: entity-picker
+
+    07_energy_daily:
+      name: Pick the entity for the daily energy measurement
+      description: Pick the entity for the daily energy measurement
+      type: entity-picker
+
+    08_energy_monthly:
+      name: Pick the entity for the monthly energy measurement
+      description: Pick the entity for the monthly energy measurement
+      type: entity-picker
+
+    09_energy_yearly:
+      name: Pick the entity for the yearly energy measurement
+      description: Pick the entity for the yearly energy measurement
+      type: entity-picker
+
 card:
-  type: horizontal-stack
+  type: vertical-stack
   cards:
     - type: custom:stack-in-card
       cards:
@@ -40,9 +65,9 @@ card:
           primary: $01_Thermostat_name$
           secondary: >-
             🌡{{
-            state_attr('$02_thermostat_entity$','current_temperature')|float}}°C
+            states('$03_room_temperature$')|float}}°C (Airco: {{states('sensor.$05_helper_name$_temperature')|float}}°C)
             💧{{
-            states('$11_room_humidity$')|float}}%
+            states('$04_room_humidity$')|float}}%
           icon: |-
             {% set mode = states('$02_thermostat_entity$') %}
             {% if mode == 'heat' %}
@@ -50,7 +75,7 @@ card:
             {% elif mode == 'cool' %}
             mdi:snowflake
             {% elif mode == 'heat_cool' %}
-            mdi:sun-snowflaked-
+            mdi:sun-snowflake
             {% elif mode == 'dry' %}
             mdi:water-percent
             {% elif mode == 'fan_only' %}
@@ -89,91 +114,774 @@ card:
           hide:
             temperature: true
             state: true
-          decimals: '0'
-          step_size: '1'
+          decimals: "0"
+          step_size: "1"
         - type: horizontal-stack
           cards:
-            - type: button
+            - type: custom:button-card
+              entity: input_boolean.$05_helper_name$_fan_mode
               tap_action:
                 action: toggle
-              entity: switch.salon_streamer
               show_name: false
               show_icon: true
               show_state: false
-              icon_height: 25px
-              name: Streamer
-            - type: button
+              state:
+                - value: "on"
+                  styles:
+                    card:
+                      - background-color: "#8a8a8a"
+                      - "--keep-background": "true"
+              styles:
+                card:
+                  - box-shadow: none
+                  - padding-top: 1px
+                  - padding-bottom: 2px
+                  - padding-left: 1px
+                  - padding-right: 1px
+                  - background-color: "#191919B3"
+                  - "--keep-background": "true"
+                img_cell:
+                  - background: transparent
+                  - border-radius: 5px
+                  - height: 25px
+                name:
+                  - font-size: 12px
+                icon:
+                  - size: 14px
+            - type: custom:button-card
+              entity: input_boolean.$05_helper_name$_swing_mode
               tap_action:
                 action: toggle
-              entity: input_boolean.$04_helper_name$_temp
               show_name: false
               show_icon: true
               show_state: false
-              icon_height: 25px
-            - type: button
+              state:
+                - value: "on"
+                  styles:
+                    card:
+                      - background-color: "#8a8a8a"
+                      - "--keep-background": "true"
+              styles:
+                card:
+                  - box-shadow: none
+                  - padding-top: 1px
+                  - padding-bottom: 2px
+                  - padding-left: 1px
+                  - padding-right: 1px
+                  - background-color: "#191919B3"
+                  - "--keep-background": "true"
+                img_cell:
+                  - background: transparent
+                  - border-radius: 5px
+                  - height: 25px
+                name:
+                  - font-size: 12px
+                icon:
+                  - size: 14px
+            - type: custom:button-card
+              entity: input_boolean.$05_helper_name$_special
               tap_action:
                 action: toggle
-              entity: input_boolean.$04_helper_name$_wilg
               show_name: false
               show_icon: true
               show_state: false
-              icon_height: 25px
-            - type: button
+              state:
+                - value: "on"
+                  styles:
+                    card:
+                      - background-color: "#8a8a8a"
+                      - "--keep-background": "true"
+              styles:
+                card:
+                  - box-shadow: none
+                  - padding-top: 1px
+                  - padding-bottom: 2px
+                  - padding-left: 1px
+                  - padding-right: 1px
+                  - background-color: "#191919B3"
+                  - "--keep-background": "true"
+                img_cell:
+                  - background: transparent
+                  - border-radius: 5px
+                  - height: 25px
+                name:
+                  - font-size: 12px
+                icon:
+                  - size: 14px
+            - type: custom:button-card
+              entity: input_boolean.$05_helper_name$_temp
               tap_action:
                 action: toggle
-              entity: input_boolean.$04_helper_name$_energy
               show_name: false
               show_icon: true
               show_state: false
-              icon_height: 25px
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-            - type: conditional
-              conditions:
-                - entity: input_boolean.$04_helper_name$_temp
-                  state: 'on'
-              card:
-                type: statistics-graph
+              state:
+                - value: "on"
+                  styles:
+                    card:
+                      - background-color: "#8a8a8a"
+                      - "--keep-background": "true"
+              styles:
+                card:
+                  - box-shadow: none
+                  - padding-top: 1px
+                  - padding-bottom: 2px
+                  - padding-left: 1px
+                  - padding-right: 1px
+                  - background-color: "#191919B3"
+                  - "--keep-background": "true"
+                img_cell:
+                  - background: transparent
+                  - border-radius: 5px
+                  - height: 25px
+                name:
+                  - font-size: 12px
+                icon:
+                  - size: 14px
+            - type: custom:button-card
+              entity: input_boolean.$05_helper_name$_humidity
+              tap_action:
+                action: toggle
+              show_name: false
+              show_icon: true
+              show_state: false
+              state:
+                - value: "on"
+                  styles:
+                    card:
+                      - background-color: "#8a8a8a"
+                      - "--keep-background": "true"
+              styles:
+                card:
+                  - box-shadow: none
+                  - padding-top: 1px
+                  - padding-bottom: 2px
+                  - padding-left: 1px
+                  - padding-right: 1px
+                  - background-color: "#191919B3"
+                  - "--keep-background": "true"
+                img_cell:
+                  - background: transparent
+                  - border-radius: 5px
+                  - height: 25px
+                name:
+                  - font-size: 12px
+                icon:
+                  - size: 14px
+            - type: custom:button-card
+              entity: input_boolean.$05_helper_name$_energy
+              tap_action:
+                action: toggle
+              show_name: false
+              show_icon: true
+              show_state: false
+              state:
+                - value: "on"
+                  styles:
+                    card:
+                      - background-color: "#8a8a8a"
+                      - "--keep-background": "true"
+              styles:
+                card:
+                  - box-shadow: none
+                  - padding-top: 1px
+                  - padding-bottom: 2px
+                  - padding-left: 1px
+                  - padding-right: 1px
+                  - background-color: "#191919B3"
+                  - "--keep-background": "true"
+                img_cell:
+                  - background: transparent
+                  - border-radius: 5px
+                  - height: 25px
+                name:
+                  - font-size: 12px
+                icon:
+                  - size: 14px
+
+    - type: vertical-stack
+      cards:
+        - type: conditional
+          conditions:
+            - entity: input_boolean.$05_helper_name$_fan_mode
+              state: "on"
+          card:
+            type: custom:stack-in-card
+            mode: horizontal
+            title: Fan modes
+            cards:
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: climate.set_fan_mode
+                  service_data:
+                    entity_id: $02_thermostat_entity$
+                    fan_mode: "auto"
+                entity: sensor.$05_helper_name$_fan_mode
+                name: Auto
+                icon: mdi:fan-auto
+                show_state: false
+                show_name: false
+                state:
+                  - value: "auto"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                        - "--keep-background": "true"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: climate.set_fan_mode
+                  service_data:
+                    entity_id: $02_thermostat_entity$
+                    fan_mode: "quiet"
+                entity: sensor.$05_helper_name$_fan_mode
+                name: Stil
+                icon: mdi:sleep
+                show_state: false
+                show_name: false
+                state:
+                  - value: "quiet"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: climate.set_fan_mode
+                  service_data:
+                    entity_id: $02_thermostat_entity$
+                    fan_mode: "lvl_1"
+                entity: sensor.$05_helper_name$_fan_mode
+                name: 1
+                icon: mdi:numeric-1-box-outline
+                show_state: false
+                show_name: false
+                state:
+                  - value: "lvl_1"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: climate.set_fan_mode
+                  service_data:
+                    entity_id: $02_thermostat_entity$
+                    fan_mode: "lvl_2"
+                entity: sensor.$05_helper_name$_fan_mode
+                name: 2
+                icon: mdi:numeric-2-box-outline
+                show_state: false
+                show_name: false
+                state:
+                  - value: lvl_2"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: climate.set_fan_mode
+                  service_data:
+                    entity_id: $02_thermostat_entity$
+                    fan_mode: "lvl_3"
+                entity: sensor.$05_helper_name$_fan_mode
+                name: 3
+                icon: mdi:numeric-3-box-outline
+                show_state: false
+                show_name: false
+                state:
+                  - value: "lvl_3"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: climate.set_fan_mode
+                  service_data:
+                    entity_id: $02_thermostat_entity$
+                    fan_mode: "lvl_4"
+                entity: sensor.$05_helper_name$_fan_mode
+                name: 4
+                icon: mdi:numeric-4-box-outline
+                show_state: false
+                show_name: false
+                state:
+                  - value: "lvl_4"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: climate.set_fan_mode
+                  service_data:
+                    entity_id: $02_thermostat_entity$
+                    fan_mode: "lvl_5"
+                entity: sensor.$05_helper_name$_fan_mode
+                name: 5
+                icon: mdi:numeric-5-box-outline
+                show_state: false
+                show_name: false
+                state:
+                  - value: "lvl_5"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+
+    - type: vertical-stack
+      cards:
+        - type: conditional
+          conditions:
+            - entity: input_boolean.$05_helper_name$_swing_mode
+              state: "on"
+          card:
+            type: custom:stack-in-card
+            mode: horizontal
+            title: Swing modes
+            cards:
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: climate.set_swing_mode
+                  service_data:
+                    entity_id: $02_thermostat_entity$
+                    fan_mode: "off"
+                entity: sensor.$05_helper_name$_swing_mode
+                name: "Off"
+                icon: mdi:power-off
+                show_state: false
+                show_name: false
+                state:
+                  - value: "off"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: climate.set_swing_mode
+                  service_data:
+                    entity_id: $02_thermostat_entity$
+                    fan_mode: "on"
+                entity: sensor.$05_helper_name$_swing_mode
+                name: "On"
+                icon: mdi:power-on
+                show_state: false
+                show_name: false
+                state:
+                  - value: "on"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+    - type: vertical-stack
+      cards:
+        - type: conditional
+          conditions:
+            - entity: input_boolean.$05_helper_name$_special
+              state: "on"
+          card:
+            type: custom:stack-in-card
+            mode: horizontal
+            title: Special modes
+            cards:
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: mqtt.publish
+                  service_data:
+                    topic: $05_helper_name$/specialmode/set
+                    payload: "off"
+                  target: {}
+                entity: sensor.$05_helper_name$_special_mode
+                name: "Off"
+                icon: mdi:power-off
+                show_state: false
+                show_name: false
+                state:
+                  - value: "off"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: mqtt.publish
+                  service_data:
+                    topic: $05_helper_name$/specialmode/set
+                    payload: "hi-power"
+                  target: {}
+                entity: sensor.$05_helper_name$_special_mode
+                name: "Hi-Power"
+                icon: mdi:fan-plus
+                show_state: false
+                show_name: false
+                state:
+                  - value: "hi-power"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: mqtt.publish
+                  service_data:
+                    topic: $05_helper_name$/specialmode/set
+                    payload: "eco"
+                  target: {}
+                entity: sensor.$05_helper_name$_special_mode
+                name: "ECO"
+                icon: mdi:leaf
+                show_state: false
+                show_name: false
+                state:
+                  - value: "eco"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+              - type: custom:button-card
+                tap_action:
+                  action: call-service
+                  service: mqtt.publish
+                  service_data:
+                    topic: $05_helper_name$/specialmode/set
+                    payload: "silent"
+                  target: {}
+                entity: sensor.$05_helper_name$_special_mode
+                name: "Silent"
+                icon: mdi:sleep
+                show_state: false
+                show_name: false
+                state:
+                  - value: "silent"
+                    styles:
+                      card:
+                        - background-color: "#8a8a8a"
+                styles:
+                  card:
+                    - box-shadow: none
+                    - padding-top: 1px
+                    - padding-bottom: 2px
+                    - padding-left: 1px
+                    - padding-right: 1px
+                    - background-color: "#191919B3"
+                    - "--keep-background": "true"
+                  img_cell:
+                    - background: transparent
+                    - border-radius: 5px
+                    - height: 33px
+                  name:
+                    - font-size: 12px
+                  icon:
+                    - size: 14px
+    - type: vertical-stack
+      cards:
+        - type: conditional
+          conditions:
+            - entity: input_boolean.$05_helper_name$_temp
+              state: "on"
+          card:
+            type: custom:stack-in-card
+            mode: horizontal
+            title: Temperatuur
+            cards:
+              - type: custom:mini-graph-card
                 entities:
-                  - sensor.hmip_wth_2_000a9be9a3e3ae_actual_temperature
-                title: Temperatura Salon
-                stat_types:
-                  - mean
-                chart_type: line
-                days_to_show: 3
-            - type: conditional
-              conditions:
-                - entity: input_boolean.$04_helper_name$_wilg
-                  state: 'on'
-              card:
-                type: statistics-graph
+                  - entity: sensor.$05_helper_name$_temperature
+                    name: Airco
+                  - entity: $03_room_temperature$
+                    name: Ruimte
+                hours_to_show: 72
+                show:
+                  name: false
+                color_thresholds:
+                  - color: "#0000ff"
+                    value: -10
+                  - color: "#0037ff"
+                    value: -5
+                  - color: "#006eff"
+                    value: 0
+                  - color: "#00c8ff"
+                    value: 5
+                  - color: "#00ff7b"
+                    value: 10
+                  - color: "#ffff00"
+                    value: 15
+                  - color: "#ff8000"
+                    value: 20
+                  - color: "#ff3700"
+                    value: 25
+                  - color: "#ff0000"
+                    value: 30
+    - type: vertical-stack
+      cards:
+        - type: conditional
+          conditions:
+            - entity: input_boolean.$05_helper_name$_humidity
+              state: "on"
+          card:
+            type: custom:stack-in-card
+            mode: horizontal
+            title: Luchtvochtigheid
+            cards:
+              - type: custom:mini-graph-card
                 entities:
-                  - sensor.hmip_wth_2_000a9be9a3e3ae_humidity
-                title: Wilgotność Sypialni
-                stat_types:
-                  - mean
-                chart_type: bar
-                days_to_show: 3
-            - type: conditional
-              conditions:
-                - entity: input_boolean.$04_helper_name$_energy
-                  state: 'on'
-              card:
-                type: entities
+                  - $04_room_humidity$
+                hours_to_show: 72
+                line_color: blue
+                show:
+                  name: false
+    - type: vertical-stack
+      cards:
+        - type: conditional
+          conditions:
+            - entity: input_boolean.$05_helper_name$_energy
+              state: "on"
+          card:
+            type: custom:stack-in-card
+            mode: vertical
+            title: Energie
+            cards:
+              - type: custom:mini-graph-card
                 entities:
-                  - entity: sensor.sypialnia_daily_cool_energy_consumption
-                    name: Dzienne
-                  - entity: sensor.sypialnia_daily_heat_energy_consumption
-                    name: Dzienne
-                  - entity: sensor.sypialnia_weekly_cool_energy_consumption
-                    name: Tygodniowe
-                  - entity: sensor.sypialnia_weekly_heat_energy_consumption
-                    name: Tygodniowe
-                  - entity: sensor.sypialnia_yearly_cool_energy_consumption
-                    name: Roczne
-                  - entity: sensor.sypialnia_yearly_heat_energy_consumption
-                    name: Roczne
-                title: Zużycie energii
+                  - $06_energy_current$
+                hours_to_show: 72
+                show:
+                  name: false
+                color_thresholds:
+                  - color: "#00ff00"
+                    value: 0
+                  - color: "#37ff00"
+                    value: 50
+                  - color: "#6eff00"
+                    value: 100
+                  - color: "#c8ff00"
+                    value: 150
+                  - color: "#ff7b00"
+                    value: 200
+                  - color: "#ffff00"
+                    value: 250
+                  - color: "#ff8000"
+                    value: 300
+                  - color: "#ff3700"
+                    value: 350
+                  - color: "#ff0000"
+                    value: 400
+              - type: entities
+                entities:
+                  - entity: $06_energy_current$
+                    name: Huidig verbruik
+                  - entity: $07_energy_daily$
+                    name: Week verbruik
+                  - entity: $08_energy_monthly$
+                    name: Maand verbruik
+                  - entity: $09_energy_yearly$
+                    name: Jaar verbruik
                 show_header_toggle: false
                 state_color: false
