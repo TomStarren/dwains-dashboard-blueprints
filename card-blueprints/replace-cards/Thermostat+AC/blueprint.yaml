@@ -20,6 +20,7 @@ blueprint:
       name: Thermostat entity
       description: The thermostat entity
       type: entity-picker
+      default: $replace_with_input_entity$
 
     03_room_temperature:
       name: Pick the entity for the room temperature
@@ -74,7 +75,7 @@ card:
             💧{{
             states('$04_room_humidity$')|float}}%
           icon: |-
-            {% set mode = states('$02_thermostat_entity$') %}
+            {% set mode = states('$replace_with_input_entity$') %}
             {% if mode == 'heat' %}
             mdi:fire
             {% elif mode == 'cool' %}
@@ -89,7 +90,7 @@ card:
             mdi:air-conditioner
             {% endif %}
           icon_color: |-
-            {% set status = states('$02_thermostat_entity$') %}
+            {% set status = states('$replace_with_input_entity$') %}
             {% if status == 'cool' %}
             #2b9af9
             {% elif status == 'heat' %}
@@ -105,7 +106,7 @@ card:
             {% endif %}
           tap_action: none
         - type: custom:simple-thermostat
-          entity: $02_thermostat_entity$
+          entity: $replace_with_input_entity$
           header: false
           control: $03_thermostat_controls_buttons_hide_show$
           layout:
@@ -320,7 +321,7 @@ card:
                   action: call-service
                   service: climate.set_fan_mode
                   service_data:
-                    entity_id: $02_thermostat_entity$
+                    entity_id: $replace_with_input_entity$
                     fan_mode: "auto"
                 entity: sensor.$05_helper_name$_fan_mode
                 name: Auto
@@ -355,7 +356,7 @@ card:
                   action: call-service
                   service: climate.set_fan_mode
                   service_data:
-                    entity_id: $02_thermostat_entity$
+                    entity_id: $replace_with_input_entity$
                     fan_mode: "quiet"
                 entity: sensor.$05_helper_name$_fan_mode
                 name: Stil
@@ -389,7 +390,7 @@ card:
                   action: call-service
                   service: climate.set_fan_mode
                   service_data:
-                    entity_id: $02_thermostat_entity$
+                    entity_id: $replace_with_input_entity$
                     fan_mode: "lvl_1"
                 entity: sensor.$05_helper_name$_fan_mode
                 name: 1
@@ -423,7 +424,7 @@ card:
                   action: call-service
                   service: climate.set_fan_mode
                   service_data:
-                    entity_id: $02_thermostat_entity$
+                    entity_id: $replace_with_input_entity$
                     fan_mode: "lvl_2"
                 entity: sensor.$05_helper_name$_fan_mode
                 name: 2
@@ -457,7 +458,7 @@ card:
                   action: call-service
                   service: climate.set_fan_mode
                   service_data:
-                    entity_id: $02_thermostat_entity$
+                    entity_id: $replace_with_input_entity$
                     fan_mode: "lvl_3"
                 entity: sensor.$05_helper_name$_fan_mode
                 name: 3
@@ -491,7 +492,7 @@ card:
                   action: call-service
                   service: climate.set_fan_mode
                   service_data:
-                    entity_id: $02_thermostat_entity$
+                    entity_id: $replace_with_input_entity$
                     fan_mode: "lvl_4"
                 entity: sensor.$05_helper_name$_fan_mode
                 name: 4
@@ -525,7 +526,7 @@ card:
                   action: call-service
                   service: climate.set_fan_mode
                   service_data:
-                    entity_id: $02_thermostat_entity$
+                    entity_id: $replace_with_input_entity$
                     fan_mode: "lvl_5"
                 entity: sensor.$05_helper_name$_fan_mode
                 name: 5
@@ -571,7 +572,7 @@ card:
                   action: call-service
                   service: climate.set_swing_mode
                   service_data:
-                    entity_id: $02_thermostat_entity$
+                    entity_id: $replace_with_input_entity$
                     fan_mode: "off"
                 entity: sensor.$05_helper_name$_swing_mode
                 name: "Off"
@@ -605,7 +606,7 @@ card:
                   action: call-service
                   service: climate.set_swing_mode
                   service_data:
-                    entity_id: $02_thermostat_entity$
+                    entity_id: $replace_with_input_entity$
                     fan_mode: "on"
                 entity: sensor.$05_helper_name$_swing_mode
                 name: "On"
