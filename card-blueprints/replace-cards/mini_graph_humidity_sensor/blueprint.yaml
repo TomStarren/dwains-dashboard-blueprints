@@ -1,0 +1,14 @@
+blueprint:
+  name: Replace Mini-Graph for humidity sensor
+  description: Replace Mini-Graph for humidity sensor by TS
+  version: "1.0.0"
+  type: replace-card
+
+  custom_cards:
+    - mini-graph-card
+card:
+  line_color: blue
+  entities:
+    - entity: $replace_with_input_entity$
+  hours_to_show: 72
+  type: custom:mini-graph-card
