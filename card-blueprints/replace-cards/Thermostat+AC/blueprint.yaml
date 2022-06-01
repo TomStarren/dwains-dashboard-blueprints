@@ -1,14 +1,14 @@
 blueprint:
-  name: Thermostat and AC card
-  description: Thermostat and AC card by TS
+  name: Replace Thermostat and AC card
+  description: Replace Thermostat and AC card by TS
   version: "1.0.0"
-  type: replace
+  type: replace-card
 
   custom_cards:
     - simple-thermostat
     - stack-in-card
     - button-card
-    - custom:mini-graph-card
+    - mini-graph-card
 
   input:
     01_Thermostat_name:
