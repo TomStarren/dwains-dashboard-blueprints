@@ -1,0 +1,139 @@
+blueprint:
+  description: Replaces airco popup card (Fan mode) by TS
+  name: Replace airco popup card (fan mode)
+  type: replace-card
+  version: "0.8.0"
+  input:
+    01_helper_name:
+      description: Name for the airco helper
+      name: Pick the name for the airco helper
+      type: text-field
+card:
+  type: vertical-stack
+  cards:
+    - entity: sensor.$01_helper_name$_fan_mode
+      icon: mdi:fan-auto
+      name: "Auto"
+      show_name: false
+      show_state: false
+      size: 33px
+      state:
+        - styles:
+            card:
+              - background-color: var(--light-primary-color)
+          value: auto
+      tap_action:
+        action: call-service
+        service: climate.set_fan_mode
+        service_data:
+          entity_id: climate.$01_helper_name$
+          fan_mode: auto
+      type: custom:button-card
+    - entity: sensor.$01_helper_name$_fan_mode
+      icon: mdi:sleep
+      name: "Stil"
+      show_name: false
+      show_state: false
+      size: 33px
+      state:
+        - styles:
+            card:
+              - background-color: var(--light-primary-color)
+          value: quiet
+      tap_action:
+        action: call-service
+        service: climate.set_fan_mode
+        service_data:
+          entity_id: climate.$01_helper_name$
+          fan_mode: quiet
+      type: custom:button-card
+    - entity: sensor.$01_helper_name$_fan_mode
+      icon: mdi:numeric-1-box-outline
+      name: "1"
+      show_name: false
+      show_state: false
+      size: 33px
+      state:
+        - styles:
+            card:
+              - background-color: var(--light-primary-color)
+          value: lvl_1
+      tap_action:
+        action: call-service
+        service: climate.set_fan_mode
+        service_data:
+          entity_id: climate.$01_helper_name$
+          fan_mode: lvl_1
+      type: custom:button-card
+    - entity: sensor.$01_helper_name$_fan_mode
+      icon: mdi:numeric-2-box-outline
+      name: "2"
+      show_name: false
+      show_state: false
+      size: 33px
+      state:
+        - styles:
+            card:
+              - background-color: var(--light-primary-color)
+          value: lvl_2
+      tap_action:
+        action: call-service
+        service: climate.set_fan_mode
+        service_data:
+          entity_id: climate.$01_helper_name$
+          fan_mode: lvl_2
+      type: custom:button-card
+    - entity: sensor.$01_helper_name$_fan_mode
+      icon: mdi:numeric-3-box-outline
+      name: "3"
+      show_name: false
+      show_state: false
+      size: 33px
+      state:
+        - styles:
+            card:
+              - background-color: var(--light-primary-color)
+          value: lvl_3
+      tap_action:
+        action: call-service
+        service: climate.set_fan_mode
+        service_data:
+          entity_id: climate.$01_helper_name$
+          fan_mode: lvl_3
+      type: custom:button-card
+    - entity: sensor.$01_helper_name$_fan_mode
+      icon: mdi:numeric-4-box-outline
+      name: "4"
+      show_name: false
+      show_state: false
+      size: 33px
+      state:
+        - styles:
+            card:
+              - background-color: var(--light-primary-color)
+          value: lvl_4
+      tap_action:
+        action: call-service
+        service: climate.set_fan_mode
+        service_data:
+          entity_id: climate.$01_helper_name$
+          fan_mode: lvl_4
+      type: custom:button-card
+    - entity: sensor.$01_helper_name$_fan_mode
+      icon: mdi:numeric-5-box-outline
+      name: "5"
+      show_name: false
+      show_state: false
+      size: 33px
+      state:
+        - styles:
+            card:
+              - background-color: var(--light-primary-color)
+          value: lvl_5
+      tap_action:
+        action: call-service
+        service: climate.set_fan_mode
+        service_data:
+          entity_id: climate.$01_helper_name$
+          fan_mode: lvl_5
+      type: custom:button-card
