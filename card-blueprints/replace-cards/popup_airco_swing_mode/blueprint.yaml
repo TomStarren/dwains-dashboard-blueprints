@@ -1,0 +1,49 @@
+blueprint:
+  description: Replaces airco popup card (Swing mode) by TS
+  name: Replace airco popup card (swing mode)
+  type: replace-card
+  version: "0.8.0"
+  input:
+    01_helper_name:
+      description: Name for the airco helper
+      name: Pick the name for the airco helper
+      type: text-field
+card:
+  type: vertical-stack
+  cards:
+    - entity: sensor.$01_helper_name$_swing_mode
+      icon: mdi:power-off
+      name: "Off"
+      show_name: false
+      show_state: false
+      size: 33px
+      state:
+        - styles:
+            card:
+              - background-color: var(--light-primary-color)
+          value: "off"
+      tap_action:
+        action: call-service
+        service: climate.set_swing_mode
+        service_data:
+          entity_id: climate.$01_helper_name$
+          swing_mode: "off"
+      type: custom:button-card
+    - entity: sensor.$01_helper_name$_swing_mode
+      icon: mdi:power-on
+      name: "On"
+      show_name: false
+      show_state: false
+      size: 33px
+      state:
+        - styles:
+            card:
+              - background-color: var(--light-primary-color)
+          value: "on"
+      tap_action:
+        action: call-service
+        service: climate.set_swing_mode
+        service_data:
+          entity_id: climate.$01_helper_name$
+          swing_mode: "on"
+      type: custom:button-card
