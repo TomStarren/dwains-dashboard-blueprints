@@ -14,7 +14,7 @@ blueprint:
       type: text-field
   name: Replace Thermostat and AC card
   type: replace-card
-  version: 1.0.1
+  version: 1.0.2
 card:
   cards:
     - cards:
@@ -97,6 +97,16 @@ card:
               hold_action:
                 action: none
               entity: input_boolean.dummy_popup_$02_helper_name$_energy
+              icon_height: 24px
+            - type: button
+              show_name: false
+              show_icon: true
+              name: "Schedule"
+              tap_action:
+                action: more-info
+              hold_action:
+                action: none
+              entity: input_boolean.dummy_popup_$02_helper_name$_schedule
               icon_height: 24px
           type: horizontal-stack
       type: custom:stack-in-card
