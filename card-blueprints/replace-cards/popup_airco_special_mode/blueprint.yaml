@@ -1,0 +1,89 @@
+blueprint:
+  description: Replaces airco popup card (Special mode) by TS
+  input:
+    01_helper_name:
+      description: Name for the airco helper
+      name: Pick the name for the airco helper
+      type: text-field
+  name: Replace airco popup card (special mode)
+  type: replace-card
+  version: 0.8.0
+card:
+  cards:
+  - entity: sensor.$01_helper_name$_special_mode
+    icon: mdi:power-off
+    name: 'Off'
+    show_name: false
+    show_state: false
+    size: 33px
+    state:
+    - styles:
+        card:
+        - background-color: var(--light-primary-color)
+      value: 'off'
+    tap_action:
+      action: call-service
+      service: mqtt.publish
+      service_data:
+        payload: 'off'
+        topic: $01_helper_name$/specialmode/set
+      target: {}
+    type: custom:button-card
+  - entity: sensor.$01_helper_name$_special_mode
+    icon: mdi:fan-plus
+    name: Hi-Power
+    show_name: false
+    show_state: false
+    size: 33px
+    state:
+    - styles:
+        card:
+        - background-color: var(--light-primary-color)
+      value: hi-power
+    tap_action:
+      action: call-service
+      service: mqtt.publish
+      service_data:
+        payload: hi-power
+        topic: $01_helper_name$/specialmode/set
+      target: {}
+    type: custom:button-card
+  - entity: sensor.$01_helper_name$_special_mode
+    icon: mdi:leaf
+    name: ECO
+    show_name: false
+    show_state: false
+    size: 33px
+    state:
+    - styles:
+        card:
+        - background-color: var(--light-primary-color)
+      value: eco
+    tap_action:
+      action: call-service
+      service: mqtt.publish
+      service_data:
+        payload: eco
+        topic: $01_helper_name$/specialmode/set
+      target: {}
+    type: custom:button-card
+  - entity: sensor.$01_helper_name$_special_mode
+    icon: mdi:sleep
+    name: Stil
+    show_name: false
+    show_state: false
+    size: 33px
+    state:
+    - styles:
+        card:
+        - background-color: var(--light-primary-color)
+      value: silent
+    tap_action:
+      action: call-service
+      service: mqtt.publish
+      service_data:
+        payload: silent
+        topic: $01_helper_name$/specialmode/set
+      target: {}
+    type: custom:button-card
+  type: vertical-stack
