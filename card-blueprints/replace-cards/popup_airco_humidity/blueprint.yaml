@@ -1,0 +1,24 @@
+blueprint:
+    description: Replaces airco popup card (Humidity) by TS
+    name: Replace airco popup card (Humidity)
+    type: replace-card
+    version: "0.8.0"
+    input:
+      01_helper_name:
+        description: Name for the airco helper
+        name: Pick the name for the airco helper
+        type: text-field
+      02_room_humidity:
+        description: The humidity of this entity will be used in the card
+        name: Pick the entity for the room humidity
+        type: entity-picker
+card:
+  type: vertical-stack
+  cards:
+    - entities:
+        - $02_room_humidity$
+      hours_to_show: 72
+      line_color: blue
+      show:
+        name: false
+      type: custom:mini-graph-card
