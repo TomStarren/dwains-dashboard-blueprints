@@ -1,0 +1,45 @@
+blueprint:
+    description: Replaces airco popup card (Temperatures) by TS
+    name: Replace airco popup card (temperatures)
+    type: replace-card
+    version: "0.8.1"
+    input:
+      01_helper_name:
+        description: Name for the airco helper
+        name: Pick the name for the airco helper
+        type: text-field
+      02_room_temperature:
+        description: The temperature of this entity will be used in the card
+        name: Pick the entity for the room temperature
+        type: entity-picker
+card:
+  type: vertical-stack
+  cards:
+    - color_thresholds:
+        - color: "#0000ff"
+          value: -10
+        - color: "#0037ff"
+          value: -5
+        - color: "#006eff"
+          value: 0
+        - color: "#00c8ff"
+          value: 5
+        - color: "#00ff7b"
+          value: 10
+        - color: "#ffff00"
+          value: 15
+        - color: "#ff8000"
+          value: 20
+        - color: "#ff3700"
+          value: 25
+        - color: "#ff0000"
+          value: 30
+      entities:
+        - entity: sensor.$01_helper_name$_temperature
+          name: Airco
+        - entity: $02_room_temperature$
+          name: Ruimte
+      hours_to_show: 72
+      show:
+        name: false
+      type: custom:mini-graph-card
