@@ -1,0 +1,103 @@
+blueprint:
+  custom_cards:
+    - simple-thermostat
+    - stack-in-card
+  description: Replace Thermostat and AC card by TS
+  input:
+    01_Thermostat_name:
+      description: Thermostat name
+      name: Thermostat name
+      type: text-field
+    02_helper_name:
+      description: Name for the helper
+      name: Pick the name for the helper
+      type: text-field
+  name: Replace Thermostat and AC card
+  type: replace-card
+  version: 1.0.1
+card:
+  cards:
+    - cards:
+        - control:
+            hvac: true
+          decimals: "0"
+          entity: climate.$02_helper_name$
+          header:
+            name: $01_Thermostat_name$
+          hide:
+            state: true
+            temperature: true
+          layout:
+            mode:
+              headings: false
+              icons: true
+              names: false
+            sensors:
+              labels: true
+            step: column
+          step_size: "1"
+          type: custom:simple-thermostat
+        - cards:
+            - type: button
+              show_name: false
+              show_icon: true
+              name: "Fan modes"
+              tap_action:
+                action: more-info
+              hold_action:
+                action: none
+              entity: input_boolean.dummy_popup_$02_helper_name$_fan
+              icon_height: 24px
+            - type: button
+              show_name: false
+              show_icon: true
+              name: "Swing modes"
+              tap_action:
+                action: more-info
+              hold_action:
+                action: none
+              entity: input_boolean.dummy_popup_$02_helper_name$_swing
+              icon_height: 24px
+            - type: button
+              show_name: false
+              show_icon: true
+              name: "Special modes"
+              tap_action:
+                action: more-info
+              hold_action:
+                action: none
+              entity: input_boolean.dummy_popup_$02_helper_name$_special
+              icon_height: 24px
+            - type: button
+              show_name: false
+              show_icon: true
+              name: "Temperatures"
+              tap_action:
+                action: more-info
+              hold_action:
+                action: none
+              entity: input_boolean.dummy_popup_$02_helper_name$_temp
+              icon_height: 24px
+            - type: button
+              show_name: false
+              show_icon: true
+              name: "Luchtvochtigheid"
+              tap_action:
+                action: more-info
+              hold_action:
+                action: none
+              entity: input_boolean.dummy_popup_$02_helper_name$_humidity
+              icon_height: 24px
+            - type: button
+              show_name: false
+              show_icon: true
+              name: "Energie"
+              tap_action:
+                action: more-info
+              hold_action:
+                action: none
+              entity: input_boolean.dummy_popup_$02_helper_name$_energy
+              icon_height: 24px
+          type: horizontal-stack
+      type: custom:stack-in-card
+  type: vertical-stack
