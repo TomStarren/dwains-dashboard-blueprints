@@ -1,0 +1,56 @@
+blueprint:
+  description: Replaces airco popup card (Energy) by TS
+  name: Replace airco popup card (Energy)
+  type: replace-card
+  version: "0.8.0"
+  input:
+    01_helper_name:
+      description: Name for the airco helper
+      name: Pick the name for the airco helper
+      type: text-field
+    02_energy_current:
+      description: Pick the entity for the current energy measurement
+      name: Pick the entity for the current energy measurement
+      type: entity-picker
+card:
+  type: vertical-stack
+  cards:
+    - color_thresholds:
+        - color: "#00ff00"
+          value: 0
+        - color: "#37ff00"
+          value: 50
+        - color: "#6eff00"
+          value: 100
+        - color: "#c8ff00"
+          value: 150
+        - color: "#ff7b00"
+          value: 200
+        - color: "#ffff00"
+          value: 250
+        - color: "#ff8000"
+          value: 300
+        - color: "#ff3700"
+          value: 350
+        - color: "#ff0000"
+          value: 400
+      entities:
+        - $02_energy_current$
+      hours_to_show: 72
+      show:
+        name: false
+      type: custom:mini-graph-card
+    - entities:
+        - entity: $02_energy_current$
+          name: Huidig verbruik
+        - entity: sensor.$01_helper_name$_energy_daily
+          name: Dag verbruik
+        - entity: sensor.$01_helper_name$_energy_weekly
+          name: Week verbruik
+        - entity: sensor.$01_helper_name$_energy_monthly
+          name: Maand verbruik
+        - entity: sensor.$01_helper_name$_energy_yearly
+          name: Jaar verbruik
+      show_header_toggle: false
+      state_color: false
+      type: entities
