@@ -1,0 +1,75 @@
+blueprint:
+    description: Replaces airco popup card (Schedule) by TS
+    name: Replace airco popup card (schedule)
+    type: replace-card
+    version: "0.8.0"
+    input:
+      01_helper_name:
+        description: Name for the airco helper
+        name: Pick the name for the airco helper
+        type: text-field
+card:
+  title: Airco schedule
+  type: custom:stack-in-card
+  cards:
+    - type: horizontal-stack
+      cards:
+        - type: custom:mushroom-entity-card
+          entity: input_select.$01_helper_name$_modus
+          name: Modus
+          icon_color: green
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.$01_helper_name$_debug
+          name: Debug
+          icon_color: orange
+      entities:
+        - type: divider
+    - type: custom:mushroom-title-card
+      title: Instellingen
+      alignment: center
+    - type: custom:scheduler-card
+      include:
+        - input_select.$01_helper_name$_modus
+        - sensor.$01_helper_name$_koelen
+      exclude: []
+      show_header_toggle: false
+      title: Tijdplanner
+      discover_existing: false
+      sort_by:
+        - state
+        - relative-time
+      display_options:
+        primary_info: default
+        secondary_info:
+          - relative-time
+          - days
+          - time
+        icon: entity
+      tags:
+        - $01_helper_name$_modus
+    - type: entities
+      entities:
+        - type: divider
+    - type: custom:scheduler-card
+      include:
+        - input_boolean.$01_helper_name$_hi_power_modus
+        - input_number.$01_helper_name$_temperatuur_koelen
+        - input_number.$01_helper_name$_temperatuur_verwarmen
+        - input_number.$01_helper_name$_verwarmen
+        - input_number.$01_helper_name$_koelen
+      exclude: []
+      show_header_toggle: false
+      title: Opties
+      discover_existing: false
+      sort_by:
+        - state
+        - relative-time
+      display_options:
+        primary_info: default
+        secondary_info:
+          - relative-time
+          - days
+          - time
+        icon: entity
+      tags:
+        - $01_helper_name$_opties
