@@ -2,7 +2,7 @@ blueprint:
     description: Replaces airco popup card (Schedule) by TS
     name: Replace airco popup card (schedule)
     type: replace-card
-    version: "1.0.1"
+    version: "1.0.2"
     input:
       01_helper_name:
         description: Name for the airco helper
@@ -18,6 +18,10 @@ card:
           entity: input_select.$01_helper_name$_modus
           name: Modus
           icon_color: green
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.$01_helper_name$_manual
+          name: Handbediening
+          icon_color: purple
         - type: custom:mushroom-entity-card
           entity: input_boolean.$01_helper_name$_debug
           name: Debug
