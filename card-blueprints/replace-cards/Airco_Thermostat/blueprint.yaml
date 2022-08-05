@@ -18,280 +18,280 @@ blueprint:
       type: text-field
   name: Replace Thermostat and AC card
   type: replace-card
-  version: 1.2.0
+  version: 1.2.1
 card:
   cards:
-    - type: conditional
-      conditions:
-        - entity: input_boolean.$02_helper_name$_manual
-          state: 'on'
-      card:
-        type: custom:mushroom-climate-card
-        entity: climate.$02_helper_name$
-        fill_container: true
-        show_temperature_control: true
-        hvac_modes:
-          - auto
-          - heat
-          - cool
-          - fan_only
-          - heat_cool
-          - dry
-          - 'off'
-        name: $01_Thermostat_name$
-    - type: conditional
-      conditions:
-        - entity: input_boolean.$02_helper_name$_manual
-          state: 'off'
-      card:
-        type: custom:mushroom-climate-card
-        entity: climate.$02_helper_name$
-        fill_container: true
-        name: Toshiba Seiya
-    - type: entities
-      entities:
-        - type: divider
-    - type: grid
-      colums: 3
-      square: false
-      cards:
-        - entity: input_boolean.dummy_popup_$02_helper_name$_fan
-          hold_action:
-            action: none
-          icon_height: 24px
-          name: Fan modes
-          show_icon: true
-          show_name: false
-          tap_action:
-            action: more-info
-          type: button
-        - entity: input_boolean.dummy_popup_$02_helper_name$_swing
-          hold_action:
-            action: none
-          icon_height: 24px
-          name: Swing modes
-          show_icon: true
-          show_name: false
-          tap_action:
-            action: more-info
-          type: button
-        - entity: input_boolean.dummy_popup_$02_helper_name$_humidity
-          hold_action:
-            action: none
-          icon_height: 24px
-          name: Luchtvochtigheid
-          show_icon: true
-          show_name: false
-          tap_action:
-            action: more-info
-          type: button
-        - entity: input_boolean.dummy_popup_$02_helper_name$_energy
-          hold_action:
-            action: none
-          icon_height: 24px
-          name: Energie
-          show_icon: true
-          show_name: false
-          tap_action:
-            action: more-info
-          type: button
-        - entity: input_boolean.dummy_popup_$02_helper_name$_special
-          hold_action:
-            action: none
-          icon_height: 24px
-          name: Special modes
-          show_icon: true
-          show_name: false
-          tap_action:
-            action: more-info
-          type: button
-        - entity: input_boolean.dummy_popup_$02_helper_name$_temp
-          hold_action:
-            action: none
-          icon_height: 24px
-          name: Temperatures
-          show_icon: true
-          show_name: false
-          tap_action:
-            action: more-info
-          type: button
-        - type: button
-          entity: input_boolean.$02_helper_name$_manual
-          icon_height: 24px
-          show_icon: true
-          show_name: false
-          hold_action:
-            action: none
-          tap_action:
-            action: toggle
-        - entity: input_boolean.dummy_popup_$02_helper_name$_schedule
-          hold_action:
-            action: none
-          icon_height: 24px
-          name: Schedule
-          show_icon: true
-          show_name: false
-          tap_action:
-            action: more-info
-          type: button
-        - entity: input_boolean.dummy_popup_$02_helper_name$_usage
-          hold_action:
-            action: none
-          icon_height: 24px
-          name: Verbruik
-          show_icon: true
-          show_name: false
-          tap_action:
-            action: toggle
-          type: button
-    - type: entities
-      entities:
-        - type: divider
-    - card:
+      - type: conditional
+        conditions:
+          - entity: input_boolean.$02_helper_name$_manual
+            state: 'on'
+        card:
+          type: custom:mushroom-climate-card
+          entity: climate.$02_helper_name$
+          fill_container: true
+          show_temperature_control: true
+          hvac_modes:
+            - auto
+            - heat
+            - cool
+            - fan_only
+            - heat_cool
+            - dry
+            - 'off'
+          name: $01_Thermostat_name$
+      - type: conditional
+        conditions:
+          - entity: input_boolean.$02_helper_name$_manual
+            state: 'off'
+        card:
+          type: custom:mushroom-climate-card
+          entity: climate.$02_helper_name$
+          fill_container: true
+          name: Toshiba Seiya
+      - type: entities
+        entities:
+          - type: divider
+      - type: grid
+        colums: 3
+        square: false
         cards:
-          - cards:
-              - double_tap_action:
-                  action: none
-                hide_icon: true
-                hold_action:
-                  action: none
-                multiline_secondary: true
-                primary: Verbruik
-                secondary: >-
-                  Dag: {{ states('sensor.$03_usage_name$_energy_daily') }} kWh
-                  ({{
-                  state_attr('sensor.$03_usage_name$_energy_daily','last_period')
-                  }} kWh)
+          - entity: input_boolean.dummy_popup_$02_helper_name$_fan
+            hold_action:
+              action: none
+            icon_height: 24px
+            name: Fan modes
+            show_icon: true
+            show_name: false
+            tap_action:
+              action: more-info
+            type: button
+          - entity: input_boolean.dummy_popup_$02_helper_name$_swing
+            hold_action:
+              action: none
+            icon_height: 24px
+            name: Swing modes
+            show_icon: true
+            show_name: false
+            tap_action:
+              action: more-info
+            type: button
+          - entity: input_boolean.dummy_popup_$02_helper_name$_humidity
+            hold_action:
+              action: none
+            icon_height: 24px
+            name: Luchtvochtigheid
+            show_icon: true
+            show_name: false
+            tap_action:
+              action: more-info
+            type: button
+          - entity: input_boolean.dummy_popup_$02_helper_name$_energy
+            hold_action:
+              action: none
+            icon_height: 24px
+            name: Energie
+            show_icon: true
+            show_name: false
+            tap_action:
+              action: more-info
+            type: button
+          - entity: input_boolean.dummy_popup_$02_helper_name$_special
+            hold_action:
+              action: none
+            icon_height: 24px
+            name: Special modes
+            show_icon: true
+            show_name: false
+            tap_action:
+              action: more-info
+            type: button
+          - entity: input_boolean.dummy_popup_$02_helper_name$_temp
+            hold_action:
+              action: none
+            icon_height: 24px
+            name: Temperatures
+            show_icon: true
+            show_name: false
+            tap_action:
+              action: more-info
+            type: button
+          - type: button
+            entity: input_boolean.$02_helper_name$_manual
+            icon_height: 24px
+            show_icon: true
+            show_name: false
+            hold_action:
+              action: none
+            tap_action:
+              action: toggle
+          - entity: input_boolean.dummy_popup_$02_helper_name$_schedule
+            hold_action:
+              action: none
+            icon_height: 24px
+            name: Schedule
+            show_icon: true
+            show_name: false
+            tap_action:
+              action: more-info
+            type: button
+          - entity: input_boolean.dummy_popup_$02_helper_name$_usage
+            hold_action:
+              action: none
+            icon_height: 24px
+            name: Verbruik
+            show_icon: true
+            show_name: false
+            tap_action:
+              action: toggle
+            type: button
+      - type: entities
+        entities:
+          - type: divider
+      - card:
+          cards:
+            - cards:
+                - double_tap_action:
+                    action: none
+                  hide_icon: true
+                  hold_action:
+                    action: none
+                  multiline_secondary: true
+                  primary: Verbruik
+                  secondary: >-
+                    Dag: {{ states('sensor.$03_usage_name$_energy_daily') }} kWh
+                    ({{
+                    state_attr('sensor.$03_usage_name$_energy_daily','last_period')
+                    }} kWh)
 
-                  Week: {{ states('sensor.$03_usage_name$_energy_weekly') }}
-                  kWh ({{
-                  state_attr('sensor.$03_usage_name$_energy_weekly','last_period')
-                  }} kWh)
+                    Week: {{ states('sensor.$03_usage_name$_energy_weekly') }}
+                    kWh ({{
+                    state_attr('sensor.$03_usage_name$_energy_weekly','last_period')
+                    }} kWh)
 
-                  Maand: {{ states('sensor.$03_usage_name$_energy_monthly') }}
-                  kWh ({{
-                  state_attr('sensor.$03_usage_name$_energy_monthly','last_period')
-                  }} kWh)
+                    Maand: {{ states('sensor.$03_usage_name$_energy_monthly') }}
+                    kWh ({{
+                    state_attr('sensor.$03_usage_name$_energy_monthly','last_period')
+                    }} kWh)
 
-                  Jaar: {{ states('sensor.$03_usage_name$_energy_yearly') }}
-                  kWh ({{
-                  state_attr('sensor.$03_usage_name$_energy_yearly','last_period')
-                  }} kWh)
-                tap_action:
-                  action: none
-                type: custom:mushroom-template-card
-              - apex_config:
-                  chart: null
-                  height: 80%
-                  dataLabels: null
-                  background:
-                    enabled: false
-                  style:
-                    colors:
-                      - var(--primary-text-color)
-                  grid: null
-                  show: false
-                  xaxis: null
-                  axisTicks:
+                    Jaar: {{ states('sensor.$03_usage_name$_energy_yearly') }}
+                    kWh ({{
+                    state_attr('sensor.$03_usage_name$_energy_yearly','last_period')
+                    }} kWh)
+                  tap_action:
+                    action: none
+                  type: custom:mushroom-template-card
+                - apex_config:
+                    chart: null
+                    height: 80%
+                    dataLabels: null
+                    background:
+                      enabled: false
+                    style:
+                      colors:
+                        - var(--primary-text-color)
+                    grid: null
                     show: false
-                  labels:
+                    xaxis: null
+                    axisTicks:
+                      show: false
+                    labels:
+                      show: false
+                  graph_span: 1w
+                  header:
+                    floating: true
+                    show: true
+                    title: Laatste 7 dagen
+                  series:
+                    - entity: sensor.$03_usage_name$_energy_daily
+                      group_by:
+                        duration: 1d
+                        func: last
+                      show:
+                        datalabels: true
+                      type: column
+                      unit: kWh
+                  span:
+                    end: day
+                  type: custom:apexcharts-card
+                  yaxis:
+                    - min: 0
+                      show: false
+                - apex_config:
+                    chart: null
+                    height: 80%
+                    dataLabels: null
+                    background:
+                      enabled: false
+                    style:
+                      colors:
+                        - var(--primary-text-color)
+                    grid: null
                     show: false
-                graph_span: 1w
-                header:
-                  floating: true
-                  show: true
-                  title: Laatste 7 dagen
-                series:
-                  - entity: sensor.$03_usage_name$_energy_daily
-                    group_by:
-                      duration: 1d
-                      func: last
-                    show:
-                      datalabels: true
-                    type: column
-                    unit: kWh
-                span:
-                  end: day
-                type: custom:apexcharts-card
-                yaxis:
-                  - min: 0
+                    xaxis: null
+                    axisTicks:
+                      show: false
+                    labels:
+                      show: false
+                  graph_span: 4w
+                  header:
+                    floating: true
+                    show: true
+                    title: Laatste 4 weken
+                  series:
+                    - entity: sensor.$03_usage_name$_energy_weekly
+                      group_by:
+                        duration: 1w
+                        func: last
+                      show:
+                        datalabels: true
+                      type: column
+                      unit: kWh
+                  span:
+                    end: day
+                  type: custom:apexcharts-card
+                  yaxis:
+                    - min: 0
+                      show: false
+                - apex_config:
+                    chart: null
+                    height: 80%
+                    dataLabels: null
+                    background:
+                      enabled: false
+                    style:
+                      colors:
+                        - var(--primary-text-color)
+                    grid: null
                     show: false
-              - apex_config:
-                  chart: null
-                  height: 80%
-                  dataLabels: null
-                  background:
-                    enabled: false
-                  style:
-                    colors:
-                      - var(--primary-text-color)
-                  grid: null
-                  show: false
-                  xaxis: null
-                  axisTicks:
-                    show: false
-                  labels:
-                    show: false
-                graph_span: 4w
-                header:
-                  floating: true
-                  show: true
-                  title: Laatste 4 weken
-                series:
-                  - entity: sensor.$03_usage_name$_energy_weekly
-                    group_by:
-                      duration: 1w
-                      func: last
-                    show:
-                      datalabels: true
-                    type: column
-                    unit: kWh
-                span:
-                  end: day
-                type: custom:apexcharts-card
-                yaxis:
-                  - min: 0
-                    show: false
-              - apex_config:
-                  chart: null
-                  height: 80%
-                  dataLabels: null
-                  background:
-                    enabled: false
-                  style:
-                    colors:
-                      - var(--primary-text-color)
-                  grid: null
-                  show: false
-                  xaxis: null
-                  axisTicks:
-                    show: false
-                  labels:
-                    show: false
-                graph_span: 52w
-                header:
-                  floating: true
-                  show: true
-                  title: Laatste maanden
-                series:
-                  - entity: sensor.$03_usage_name$_energy_monthly
-                    group_by:
-                      duration: 4w
-                      func: last
-                    show:
-                      datalabels: true
-                    type: column
-                    unit: kWh
-                span:
-                  end: day
-                type: custom:apexcharts-card
-                yaxis:
-                  - min: 0
-                    show: false
-            type: vertical-stack
-        type: custom:stack-in-card
-      conditions:
-        - entity: input_boolean.dummy_popup_$02_helper_name$_usage
-          state: 'on'
-      type: conditional
+                    xaxis: null
+                    axisTicks:
+                      show: false
+                    labels:
+                      show: false
+                  graph_span: 52w
+                  header:
+                    floating: true
+                    show: true
+                    title: Laatste maanden
+                  series:
+                    - entity: sensor.$03_usage_name$_energy_monthly
+                      group_by:
+                        duration: 4w
+                        func: last
+                      show:
+                        datalabels: true
+                      type: column
+                      unit: kWh
+                  span:
+                    end: day
+                  type: custom:apexcharts-card
+                  yaxis:
+                    - min: 0
+                      show: false
+              type: vertical-stack
+          type: custom:stack-in-card
+        conditions:
+          - entity: input_boolean.dummy_popup_$02_helper_name$_usage
+            state: 'on'
+        type: conditional
   type: custom:stack-in-card
