@@ -2,7 +2,7 @@ blueprint:
     description: Replaces airco popup card (Schedule) by TS
     name: Replace airco popup card (schedule)
     type: replace-card
-    version: "1.0.2"
+    version: "1.0.3"
     input:
       01_helper_name:
         description: Name for the airco helper
@@ -34,6 +34,7 @@ card:
     - type: custom:scheduler-card
       include:
         - input_select.$01_helper_name$_modus
+        - input_boolean.$01_helper_name$_manual
         - sensor.$01_helper_name$_koelen
       exclude: []
       show_header_toggle: false
