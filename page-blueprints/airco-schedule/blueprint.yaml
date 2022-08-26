@@ -1,0 +1,110 @@
+blueprint:
+    description: Page airco card (Schedule) by TS
+    name: Page airco popup card (schedule)
+    type: page
+    version: "1.1.0"
+    input:
+      01_helper_name:
+        description: Name for the airco helper
+        name: Pick the name for the airco helper
+        type: text-field
+card:
+  title: Airco schedule
+  type: custom:stack-in-card
+  cards:
+      - type: custom:mushroom-chips-card
+      chips:
+        - type: entity
+          entity: input_select.$01_helper_name$_modus
+          icon_color: green
+        - type: entity
+          entity: sensor.$01_helper_name$_mode
+          icon: mdi:air-conditioner
+        - type: conditional
+          conditions:
+            - entity: sensor.$01_helper_name$_mode
+              state: Cool
+          chip:
+            type: entity
+            entity: sensor.$01_helper_name$_koel_offset
+            icon_color: blue
+            icon: mdi:snowflake-thermometer
+        - type: conditional
+          conditions:
+            - entity: sensor.$01_helper_name$_mode
+              state: Heat
+          chip:
+            type: entity
+            entity: sensor.$01_helper_name$_verwarmen_offset
+            icon_color: red
+            icon: mdi:sun-thermometer
+      alignment: center
+    - type: horizontal-stack
+      cards:
+        - type: custom:mushroom-entity-card
+          entity: input_select.$01_helper_name$_away
+          name: Away
+          icon_color: yellow
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.$01_helper_name$_manual
+          name: Handbediening
+          icon_color: purple
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.$01_helper_name$_debug
+          name: Debug
+          icon_color: orange
+      entities:
+        - type: divider
+    - type: custom:mushroom-title-card
+      title: Instellingen
+      alignment: center
+    - type: custom:scheduler-card
+      include:
+        - input_select.$01_helper_name$_modus
+        - input_boolean.$01_helper_name$_manual
+        - sensor.$01_helper_name$_koelen
+      exclude: []
+      show_header_toggle: false
+      title: Tijdplanner
+      discover_existing: false
+      sort_by:
+        - state
+        - relative-time
+      display_options:
+        primary_info: default
+        secondary_info:
+          - relative-time
+          - days
+          - time
+        icon: entity
+      tags:
+        - $01_helper_name$_modus
+    - type: entities
+      entities:
+        - type: divider
+    - type: custom:scheduler-card
+      include:
+        - input_boolean.$01_helper_name$_hi_power_modus
+        - input_select.$01_helper_name$_special_modus
+        - input_select.$01_helper_name$_fan_modus
+        - input_select.$01_helper_name$_swing_modus
+        - input_number.$01_helper_name$_temperatuur_koelen
+        - input_number.$01_helper_name$_temperatuur_verwarmen
+        - input_number.$01_helper_name$_verwarmen
+        - input_number.$01_helper_name$_koelen
+      exclude: []
+      show_header_toggle: false
+      title: Opties
+      discover_existing: false
+      sort_by:
+        - state
+        - relative-time
+      display_options:
+        primary_info: default
+        secondary_info:
+          - relative-time
+          - days
+          - time
+        icon: entity
+      tags:
+        - $01_helper_name$_opties
