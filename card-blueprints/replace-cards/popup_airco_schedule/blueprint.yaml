@@ -12,7 +12,7 @@ card:
   title: Airco schedule
   type: custom:stack-in-card
   cards:
-      - type: custom:mushroom-chips-card
+    - type: custom:mushroom-chips-card
       chips:
         - type: entity
           entity: input_select.$01_helper_name$_modus
