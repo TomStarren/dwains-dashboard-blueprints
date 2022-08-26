@@ -2,7 +2,7 @@ blueprint:
     description: Replaces airco popup card (Schedule) by TS
     name: Replace airco popup card (schedule)
     type: replace-card
-    version: "1.0.4"
+    version: "1.1.0"
     input:
       01_helper_name:
         description: Name for the airco helper
@@ -12,18 +12,39 @@ card:
   title: Airco schedule
   type: custom:stack-in-card
   cards:
+      - type: custom:mushroom-chips-card
+      chips:
+        - type: entity
+          entity: input_select.$01_helper_name$_modus
+          icon_color: green
+        - type: entity
+          entity: sensor.$01_helper_name$_mode
+          icon: mdi:air-conditioner
+        - type: conditional
+          conditions:
+            - entity: sensor.$01_helper_name$_mode
+              state: Cool
+          chip:
+            type: entity
+            entity: sensor.$01_helper_name$_koel_offset
+            icon_color: blue
+            icon: mdi:snowflake-thermometer
+        - type: conditional
+          conditions:
+            - entity: sensor.$01_helper_name$_mode
+              state: Heat
+          chip:
+            type: entity
+            entity: sensor.$01_helper_name$_verwarmen_offset
+            icon_color: red
+            icon: mdi:sun-thermometer
+      alignment: center
     - type: horizontal-stack
       cards:
-        - type: custom:mushroom-entity-card
-          entity: input_select.$01_helper_name$_modus
-          name: Modus
-          icon_color: green
         - type: custom:mushroom-entity-card
           entity: input_select.$01_helper_name$_away
           name: Away
           icon_color: yellow
-    - type: horizontal-stack
-      cards:
         - type: custom:mushroom-entity-card
           entity: input_boolean.$01_helper_name$_manual
           name: Handbediening
